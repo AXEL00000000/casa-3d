@@ -1,0 +1,51 @@
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+*.iml
+*.iws
+
+# Eclipse
+.classpath
+.project
+.settings/
+bin/
+
+# Build
+out/
+build/
+*.class
+*.jar
+*.war
+*.ear
+
+# Python virtualenv (if used)
+.venv/
+venv/
+env/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Natives (compiled for current system)
+natives/
+
+# IDE project files
+.vscode/settings.json
+.vscode/launch.json
