@@ -343,11 +343,14 @@ public class Casa3D_SinEdicion implements GLEventListener,
         boolean wallMaterial=false;
         boolean isDoor=false; float doorAngle=0f,doorTarget=0f; int doorCloseDelay=0;
 
+        // ---- DIMENSIONES REALES DEL MODELO (después de escalar) ----
+        double actualWidth=1, actualHeight=1, actualDepth=1;
+
         // ---- HITBOX ----
         // noCollision = true para objetos que el jugador puede atravesar (alfombras, TV, espejos, plantas, etc.)
         boolean noCollision = false;
         // hitboxW / hitboxD son las dimensiones reales del hitbox en XZ (después de aplicar rotación)
-        // Se calculan automáticamente en computeHitbox() a partir de targetW/targetD/rotY
+        // Se calculan automáticamente en computeHitbox() a partir de las dimensiones reales del modelo
         double hitboxHalfX = 0, hitboxHalfZ = 0;
 
         SceneObject(String o,double px,double py,double pz,double rx,double ry,double rz,double tw,double th,double td){
@@ -357,20 +360,20 @@ public class Casa3D_SinEdicion implements GLEventListener,
             noCollision = esObjSinColision(o);
         }
 
-        /** Calcula los half-extents del AABB en XZ según la rotación del objeto. */
+        /** Calcula los half-extents del AABB en XZ usando las dimensiones REALES del modelo escalado. */
         void computeHitbox() {
             double marginX, marginZ;
             // Objetos largos y angostos (camas, sofás) → reducir hitbox para no bloquear pasillos
             if (isRotated90((int) rotY)) {
-                marginX = targetD < 0.5 ? 0.0 : 0.05;
-                marginZ = targetW < 0.5 ? 0.0 : 0.05;
-                hitboxHalfX = Math.max(0, targetD / 2.0 - marginX);
-                hitboxHalfZ = Math.max(0, targetW / 2.0 - marginZ);
+                marginX = actualDepth < 0.5 ? 0.0 : 0.05;
+                marginZ = actualWidth < 0.5 ? 0.0 : 0.05;
+                hitboxHalfX = Math.max(0, actualDepth / 2.0 - marginX);
+                hitboxHalfZ = Math.max(0, actualWidth / 2.0 - marginZ);
             } else {
-                marginX = targetW < 0.5 ? 0.0 : 0.05;
-                marginZ = targetD < 0.5 ? 0.0 : 0.05;
-                hitboxHalfX = Math.max(0, targetW / 2.0 - marginX);
-                hitboxHalfZ = Math.max(0, targetD / 2.0 - marginZ);
+                marginX = actualWidth < 0.5 ? 0.0 : 0.05;
+                marginZ = actualDepth < 0.5 ? 0.0 : 0.05;
+                hitboxHalfX = Math.max(0, actualWidth / 2.0 - marginX);
+                hitboxHalfZ = Math.max(0, actualDepth / 2.0 - marginZ);
             }
         }
 
@@ -400,6 +403,12 @@ public class Casa3D_SinEdicion implements GLEventListener,
             baseOffsetX=-(minX+maxX)/2.0*scaleX;
             baseOffsetY=-minY*scaleY;
             baseOffsetZ=-(minZ+maxZ)/2.0*scaleZ;
+            
+            // Guardar dimensiones REALES del modelo escalado para el hitbox
+            actualWidth = bw * scaleX;
+            actualHeight = bh * scaleY;
+            actualDepth = bd * scaleZ;
+            
             computeHitbox();
         }
     }
@@ -873,7 +882,7 @@ public class Casa3D_SinEdicion implements GLEventListener,
     }
 
     private void dibujarCajaPared(GL2 gl, SceneObject so) {
-        double w=so.targetW, h=so.targetH, d=so.targetD;
+        double w=so.actualWidth, h=so.actualHeight, d=so.actualDepth;
         double x0=-w/2.0, x1=w/2.0, y0=0.0, y1=h, z0=-d/2.0, z1=d/2.0;
         gl.glPushMatrix();
         gl.glTranslated(so.posX, so.posY, so.posZ);
@@ -981,8 +990,8 @@ public class Casa3D_SinEdicion implements GLEventListener,
         // Solo paredes planas personalizadas (wallMaterial)
         for (SceneObject so : sceneObjects) {
             if (!so.wallMaterial) continue;
-            if (so.posY >= PLAYER_HEIGHT || so.posY + so.targetH <= 0.05) continue;
-            double w = so.targetW, d = so.targetD;
+            if (so.posY >= PLAYER_HEIGHT || so.posY + so.actualHeight <= 0.05) continue;
+            double w = so.actualWidth, d = so.actualDepth;
             double halfX = isRotated90((int)so.rotY) ? d/2.0 : w/2.0;
             double halfZ = isRotated90((int)so.rotY) ? w/2.0 : d/2.0;
             if (Math.abs(x-so.posX) <= halfX+r && Math.abs(z-so.posZ) <= halfZ+r) return true;
@@ -1003,15 +1012,13 @@ public class Casa3D_SinEdicion implements GLEventListener,
             if (!so.model.loaded) continue;
             if (so.hitboxHalfX < 0.01 && so.hitboxHalfZ < 0.01) continue;
 
-            // Objetos muy delgados en altura (alfombras gruesas ~0.04, escalones)
-            if (so.targetH < 0.15) continue;  // antes era 0.25 — demasiado alto
+            // Usar altura REAL del modelo, no targetH
+            if (so.actualHeight < 0.15) continue;  // objetos muy delgados se ignoran
 
             // Objetos colgantes (encima de la cabeza)
             if (so.posY > PLAYER_HEIGHT) continue;
 
-            // Las puertas YA tienen estaEnPuerta(), pero también necesitan
-            // colisión cuando están cerradas — dejar que pasen por aquí
-            // si la puerta está cerrada (doorAngle ~0)
+            // Las puertas abiertas no colisionan
             if (so.isDoor) {
                 if (Math.abs(so.doorAngle) > 30) continue; // puerta abierta = sin colisión
             }
@@ -1045,8 +1052,8 @@ public class Casa3D_SinEdicion implements GLEventListener,
     private boolean estaEnPuerta(double x, double z, double r) {
         for (SceneObject so : sceneObjects) {
             if (!so.isDoor) continue;
-            double halfX = isRotated90((int)so.rotY) ? so.targetD/2.0 : so.targetW/2.0;
-            double halfZ = isRotated90((int)so.rotY) ? so.targetW/2.0 : so.targetD/2.0;
+            double halfX = isRotated90((int)so.rotY) ? so.actualDepth/2.0 : so.actualWidth/2.0;
+            double halfZ = isRotated90((int)so.rotY) ? so.actualWidth/2.0 : so.actualDepth/2.0;
             if (Math.abs(x-so.posX)<=halfX+r && Math.abs(z-so.posZ)<=halfZ+r) return true;
         }
         return false;
