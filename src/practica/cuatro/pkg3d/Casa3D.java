@@ -384,6 +384,66 @@ public class Casa3D implements GLEventListener,
         add("modelos/Models/OBJ format/doorway.obj",      13.99, 0.03, 17.92, 0,270,0, 1.00,1.92,0.12);
         add("modelos/Models/OBJ format/doorway.obj",      17.88, 0.03, 23.04, 0,0,0,   1.00,1.92,0.12);
         add("modelos/Models/OBJ format/stairs.obj", 11.49, 0.00, 18.88, 0,90,0, 3.10,2.40,1.60);
+        
+        // Objetos decorativos - Sala de estar
+        add("modelos/Models/OBJ format/loungeSofaCorner.obj", 4.98, 0.00, 16.39,  0,90,0,  3.60,0.94,1.60);
+        add("modelos/Models/OBJ format/loungeChair.obj", 4.58, 0.00, 18.51,  0,0,0,  1.26,0.99,1.12);
+        add("modelos/Models/OBJ format/loungeChair.obj", 4.90, 0.00, 15.32,  0,135,0,  1.26,0.99,1.12);
+        add("modelos/Models/OBJ format/cabinetTelevisionDoors.obj", 1.89, 0.00, 17.65,  0,270,0,  1.62,1.32,0.64);
+        add("modelos/Models/OBJ format/televisionModern.obj", 1.61, 1.32, 16.80,  0,270,0,  2.16,1.26,0.18);
+        add("modelos/Models/OBJ format/plantSmall3.obj", 1.50, 0.01, 21.40,  0,270,0,  0.72,1.08,0.72);
+        add("modelos/Models/OBJ format/plantSmall3.obj", 1.62, 0.01, 14.14,  0,270,0,  0.72,1.08,0.72);
+        add("modelos/Models/OBJ format/plantSmall3.obj", 4.74, 0.01, 21.55,  0,270,0,  0.72,1.08,0.72);
+        add("modelos/Models/OBJ format/rugRound.obj", 5.44, -0.03, 17.93,  0,270,0,  3.60,0.04,3.60);
+        add("modelos/Models/OBJ format/tableCross.obj", 7.66, -0.03, 24.40,  0,0,0,  3.60,1.01,1.40);
+        add("modelos/Models/OBJ format/chair.obj", 6.89, -0.03, 25.81,  0,0,0,  0.84,1.08,0.84);
+        add("modelos/Models/OBJ format/chair.obj", 5.70, -0.03, 25.83,  0,0,0,  0.84,1.08,0.84);
+        add("modelos/Models/OBJ format/chair.obj", 4.83, -0.03, 24.31,  0,180,0,  0.84,1.08,0.84);
+        add("modelos/Models/OBJ format/chair.obj", 6.17, -0.03, 24.30,  0,180,0,  0.84,1.08,0.84);
+        add("modelos/Models/OBJ format/chair.obj", 3.95, -0.03, 25.51,  0,270,0,  0.84,1.08,0.84);
+        add("modelos/Models/OBJ format/chair.obj", 7.87, -0.03, 24.30,  0,90,0,  0.84,1.08,0.84);
+        add("modelos/Models/OBJ format/tableRound.obj", 14.43, -0.03, 25.61,  0,90,0,  1.80,0.94,1.20);
+        add("modelos/Models/OBJ format/chair.obj", 15.76, -0.03, 26.02,  0,90,0,  0.84,1.08,0.84);
+        add("modelos/Models/OBJ format/chair.obj", 14.77, -0.03, 25.78,  0,180,0,  0.84,1.08,0.84);
+        add("modelos/Models/OBJ format/chair.obj", 14.24, -0.03, 26.89,  0,270,0,  0.84,1.08,0.84);
+        add("modelos/Models/OBJ format/chair.obj", 15.64, -0.03, 27.14,  0,0,0,  0.84,1.08,0.84);
+        
+        // Baño
+        add("modelos/Models/OBJ format/bathroomSink.obj", 14.26, -0.03, 14.62,  0,180,0,  0.66,0.94,0.55);
+        add("modelos/Models/OBJ format/toilet.obj", 15.80, -0.06, 14.09,  0,180,0,  0.55,0.94,0.55);
+        add("modelos/Models/OBJ format/washer.obj", 15.99, -0.06, 16.79,  0,180,0,  0.72,1.02,0.72);
+        add("modelos/Models/OBJ format/cabinetTelevisionDoors.obj", 14.82, -0.00, 16.53,  0,180,0,  0.72,0.96,0.32);
+        
+        // Librerías
+        add("modelos/Models/OBJ format/bookcaseOpen.obj", 14.30, -0.00, 20.65,  0,180,0,  0.99,2.10,0.44);
+        add("modelos/Models/OBJ format/bookcaseOpen.obj", 15.79, -0.00, 20.62,  0,180,0,  0.99,2.10,0.44);
+        add("modelos/Models/OBJ format/bookcaseOpen.obj", 14.70, -0.00, 22.39,  0,270,0,  0.99,2.10,0.44);
+        add("modelos/Models/OBJ format/cardboardBoxOpen.obj", 17.56, -0.00, 20.82,  0,270,0,  0.44,0.49,0.44);
+        
+        // Recámara
+        add("modelos/Models/OBJ format/bedDouble.obj", 14.90, 0.01, 37.57,  0,90,0,  2.20,1.05,2.85);
+        add("modelos/Models/OBJ format/cabinetBed.obj", 16.88, 0.01, 36.08,  0,90,0,  1.20,0.45,0.90);
+        add("modelos/Models/OBJ format/cabinetBed.obj", 16.97, 0.01, 39.84,  0,90,0,  1.00,0.45,0.90);
+        
+        // Estantería
+        add("modelos/Models/OBJ format/bookcaseClosedWide.obj", 13.51, 0.01, 30.13,  0,90,0,  0.63,1.80,0.32);
+        add("modelos/Models/OBJ format/bookcaseClosedWide.obj", 13.54, 0.01, 30.80,  0,90,0,  0.63,1.80,0.32);
+        add("modelos/Models/OBJ format/bookcaseClosedWide.obj", 13.49, 0.01, 31.47,  0,90,0,  0.63,1.80,0.32);
+        
+        // Sala de ocio
+        add("modelos/Models/OBJ format/loungeDesignSofaCorner.obj", 4.11, 0.01, 31.35,  0,180,0,  3.40,1.02,2.10);
+        add("modelos/Models/OBJ format/tableRound.obj", 3.38, 0.01, 32.79,  0,180,0,  2.55,0.78,2.10);
+        add("modelos/Models/OBJ format/loungeChairRelax.obj", 2.99, 0.01, 32.07,  0,270,0,  1.19,0.90,1.47);
+        add("modelos/Models/OBJ format/loungeChairRelax.obj", 3.24, 0.01, 30.75,  0,270,0,  1.19,0.90,1.47);
+        
+        // Baño adicional 2
+        add("modelos/Models/OBJ format/toilet.obj", 14.22, 0.01, 34.09,  0,270,0,  0.60,1.02,0.60);
+        add("modelos/Models/OBJ format/bathroomSink.obj", 17.35, 0.01, 33.39,  0,90,0,  0.72,1.02,0.60);
+        add("modelos/Models/OBJ format/bathroomMirror.obj", 17.65, 1.08, 33.37,  0,90,0,  0.72,1.02,0.60);
+        add("modelos/Models/OBJ format/showerRound.obj", 15.18, -0.00, 31.17,  0,270,0,  1.08,2.40,1.08);
+        add("modelos/Models/OBJ format/bathtub.obj", 17.90, -0.00, 32.30,  0,270,0,  2.04,0.72,0.96);
+        add("modelos/Models/OBJ format/rugDoormat.obj", 15.16, -0.00, 32.33,  0,270,0,  1.00,0.01,1.00);
+        add("modelos/Models/OBJ format/televisionModern.obj", 12.41, 0.98, 38.85,  0,270,0,  1.32,0.84,0.10);
     }
     private void add(String p,double px,double py,double pz,double rx,double ry,double rz,double sx,double sy,double sz){
         sceneObjects.add(new SceneObject(p,px,py,pz,rx,ry,rz,sx,sy,sz));
